@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.leoduarte</groupId>
-    <artifactId>git-clone-automated</artifactId>
+    <artifactId>git-lib</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <name>${project.artifactId}</name>
@@ -85,8 +85,10 @@
         <!-- ============================ Libraries ============================== -->
         <!-- ===================================================================== -->
 
+        <org.eclipse.jgit.version>6.7.0.202309050840-r</org.eclipse.jgit.version>
+        <org.eclipse.jgit.ssh.apache.version>6.7.0.202309050840-r</org.eclipse.jgit.ssh.apache.version>
+
         <lombok.version>1.18.30</lombok.version>
-        <org.eclipse.jgit.version>5.2.1.201812262042-r</org.eclipse.jgit.version>
         <slf4j-api.version>2.0.9</slf4j-api.version>
         <slf4j-simple.version>1.7.36</slf4j-simple.version>
         <logback-classic.version>1.4.8</logback-classic.version>
@@ -97,6 +99,37 @@
             <groupId>org.eclipse.jgit</groupId>
             <artifactId>org.eclipse.jgit</artifactId>
             <version>${org.eclipse.jgit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit.ssh.apache</artifactId>
+            <version>${org.eclipse.jgit.ssh.apache.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit.archive</artifactId>
+            <version>6.7.0.202309050840-r</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit.ssh.jsch</artifactId>
+            <version>6.7.0.202309050840-r</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit.ssh.jsch</artifactId>
+            <version>6.7.0.202309050840-r</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.15.0</version>
+        </dependency>
+        <!-- optional dependency of commons-compress which is needed by JGit -->
+        <dependency>
+            <groupId>org.tukaani</groupId>
+            <artifactId>xz</artifactId>
+            <version>1.8</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
