@@ -21,7 +21,7 @@
 ## 1 - Clonando repos
 
 - Para clonar um ou mais repositórios insira-o(s) no Set de repos contidos
-  em: [Clonar](./src/main/java/dev/leoduarte/automations/Clone.java) e execute o método main.
+  em: [GitCloneTest](./src/test/java/dev/leoduarte/automations/GitCloneTest.java) e execute o teste.
 - Esta funcionalidade leva em consideração que você tem uma chave SSH configurada na sua máquina e no repo remoto
 - O destino padrão é: ${HOME}/Git, se precisar modificar o local o problema é teu, te vira lendo a classe!!!
 

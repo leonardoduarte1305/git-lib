@@ -15,7 +15,7 @@ public class LazyDevWithBashCommands {
     // FIXME Every command will be executed recursively into the main directory, so the purpose is to clean the projects
     //  or to automatically download all the Maven dependencies for all projects
 
-    // Do not forget to configure the servers into settings.xml to access the private remote Maven registry, if necessary.
+    // FIXME Do not forget to configure the servers into settings.xml to access the private remote Maven registry, if necessary.
 
     // For further queries:
     // https://www.baeldung.com/java-lang-processbuilder-api

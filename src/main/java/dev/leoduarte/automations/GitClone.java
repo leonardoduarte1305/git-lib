@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,42 +18,30 @@ public class GitClone {
     private static final Logger LOGGER = LoggerFactory.getLogger(GitClone.class);
     private static final File SSH_DIR = new File(FS.DETECTED.userHome(), "/.ssh");
     private static final File GITCONFIG_FILE = new File(FS.detect().userHome(), ".gitconfig");
-    private static final File ROOT_PLACE_TO_CLONE = new File(FS.DETECTED.userHome(), "/Git");
 
-    public static void main(String[] args) {
-        Set<String> repos = new HashSet<>();
-        repos.add("git@github.com:leonardoduarte1305/kafka-setup.git");
-        repos.add("git@github.com:leonardoduarte1305/kafka-setup123.git");
-        repos.add("git@github.com:leonardoduarte1305/kubernetes.git");
+    public void cloneRepository(File whereToClone, Set<String> repos) {
+        // FIXME This line doesn't make any sense to me... I don't know why i left it here...
+        SshSessionFactory.setInstance(getSessionFactory());
 
-        repos.forEach(repository -> {
+        // FIXME This may fail if SSH keys are not set up properly for github.com!
+        repos.forEach(repoUrl -> {
+            String repoName = repositoryNameExtractor(repoUrl);
+            File finalPath = new File(whereToClone, repoName);
+
+            // then clone
+            // NOTE:
+            LOGGER.info("Cloning from " + repoUrl + " to " + finalPath);
+
             try {
-                cloneRepository(repository);
-            } catch (IOException | GitAPIException e) {
+                Git result = Git.cloneRepository()
+                        .setURI(repoUrl)
+                        .setDirectory(finalPath)
+                        .call();
+                LOGGER.info("Having repository: " + result.getRepository().getDirectory());
+            } catch (JGitInternalException | GitAPIException e) {
                 LOGGER.error(e.getLocalizedMessage());
             }
         });
-    }
-
-    private static void cloneRepository(String repoUrl) throws IOException, GitAPIException {
-        SshSessionFactory.setInstance(getSessionFactory());
-
-        String repoName = repositoryNameExtractor(repoUrl);
-        File finalPath = new File(GitClone.ROOT_PLACE_TO_CLONE, repoName);
-
-        // then clone
-        // NOTE: This may fail if SSH keys are not set up properly for github.com!
-        LOGGER.info("Cloning from " + repoUrl + " to " + finalPath);
-
-        try {
-            Git result = Git.cloneRepository()
-                    .setURI(repoUrl)
-                    .setDirectory(finalPath)
-                    .call();
-            LOGGER.info("Having repository: " + result.getRepository().getDirectory());
-        } catch (JGitInternalException e) {
-            LOGGER.error(e.getLocalizedMessage());
-        }
     }
 
     private static SshSessionFactory getSessionFactory() {
@@ -79,10 +65,12 @@ public class GitClone {
     }
 }
 
-// Full cookbook
+// For further queries:
+
+// Full JGIT cookbook
 // https://github.com/centic9/jgit-cookbook/tree/master/src/main/java/org/dstadler/jgit/
 
-// Pode ser ncessario copiar a configuracao global do git pasta /etc exatamente como à seguir:
+// Pode ser necessario copiar a configuracao global do git para a pasta /etc exatamente como à seguir:
 // sudo cp .gitconfig /etc/gitconfig
 //
 // se for necessario modificar o acesso ao arquivo use algo como a seguir:
