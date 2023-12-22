@@ -20,7 +20,7 @@ public class GitClone {
     private static final Logger LOGGER = LoggerFactory.getLogger(GitClone.class);
     private static final File SSH_DIR = new File(FS.DETECTED.userHome(), "/.ssh");
     private static final File GITCONFIG_FILE = new File(FS.detect().userHome(), ".gitconfig");
-    private static final File ROOT_PLACE_TO_CLONE = new File(FS.DETECTED.userHome(), "Downloads/Git");
+    private static final File ROOT_PLACE_TO_CLONE = new File(FS.DETECTED.userHome(), "/Git");
 
     public static void main(String[] args) {
         Set<String> repos = new HashSet<>();
@@ -82,7 +82,7 @@ public class GitClone {
 // Full cookbook
 // https://github.com/centic9/jgit-cookbook/tree/master/src/main/java/org/dstadler/jgit/
 
-// Pode ser ncessario copiar a configuracao global do git pata /etc exatamente como à seguir:
+// Pode ser ncessario copiar a configuracao global do git pasta /etc exatamente como à seguir:
 // sudo cp .gitconfig /etc/gitconfig
 //
 // se for necessario modificar o acesso ao arquivo use algo como a seguir:
