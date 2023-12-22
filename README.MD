@@ -8,7 +8,7 @@
 
 ## Overview
 
-#### A idéia deste proiejto é automatizar algumas tarefas relacionadas ao Git Flow
+#### A idéia deste projeto é automatizar algumas tarefas relacionadas ao Git Flow, ao Maven e etc.
 
 <hr>
 
@@ -20,7 +20,15 @@
 
 ## 1 - Clonando repos
 
-- Para clonar um ou mais repositórios insira-o(s) no Set de repos contidos em: [Clonar](./src/main/java/dev/leoduarte/gitcloneautomated/Clone.java) e execute o método main.
+- Para clonar um ou mais repositórios insira-o(s) no Set de repos contidos
+  em: [Clonar](./src/main/java/dev/leoduarte/automations/Clone.java) e execute o método main.
 - Esta funcionalidade leva em consideração que você tem uma chave SSH configurada na sua máquina e no repo remoto
 - O destino padrão é: ${HOME}/Git, se precisar modificar o local o problema é teu, te vira lendo a classe!!!
 
+## 2 - Executando comandos Maven
+
+- Para executar recursivamente comandos maven utilize a classe de
+  testes [LazyDevWithBashCommandsTest](./src/test/java/dev/leoduarte/automations/LazyDevWithBashCommandsTest.java).
+    - GIT_DIRECTORY: Diretório raíz onde você deseja executar o comando.
+    - Existem casos de teste básicos para limpar, verificar, construir e instalar os projetos.
+    - Nesta classe existem outros comandos porém são para fins didádicos e para consultas futuras.
